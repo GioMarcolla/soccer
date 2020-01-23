@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Practice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+        <header>
+            <nav class="navbar navbar-light bg-light">
+                <a class="navbar-brand" href="#">
+                    <img src="https://www.picsum.photos/30/30" width="30" height="30" class="d-inline-block align-top" alt="图片">
+                    Bootstrap
+                </a>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row" id="things">
+                    
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="http://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+<script>
+    var things = $('#things')
+
+    //<div class="card border-success mb-3">
+    //    <div class="card-header bg-transparent border-success">Header</div>
+    //    <div class="card-body text-success">
+    //        <h5 class="card-title">Success card title</h5>
+    //        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    //    </div>
+    //    <div class="card-footer bg-transparent border-success">Footer</div>
+    //</div>
+
+    $.ajax({
+        url: "https://www.scorebat.com/video-api/v1/",
+        success: function (response) {
+            var data = response
+            for (i = 0; i < data.length; i++) {
+                var whole = data[i]
+                console.log(whole)
+                var title = whole.title
+                var embed = whole.embed
+                var date = whole.date
+
+                var titleRender = '<h5 class="card-title">' + title + '<h5>'
+                var dateRender = '<p class="card-text">' + date + '</p>'
+                var embedRender = '<div class="card-img-top">' + embed + '</div>'
+                var bodyRender = '<div class="card-body">' + titleRender  + dateRender + '</div>'
+                var cardRender = '<div class="card">' + embedRender + bodyRender + '</div>'
+                var colRender = '<div class="col-6">' + cardRender + '</div>'
+                things.append(colRender)
+            }
+        }
+    })
+    // <div class="card">
+    //     <div class="card-img-top">
+    //         <!-- dump the embed data here -->
+    //     </div>
+    //     <div class="card-body">
+    //         <h5 class="card-title">Card title</h5>
+    //         <p class="card-text"> text </p>
+    //     </div>
+    // </div>
+</script>
+
+</html>
